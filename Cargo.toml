@@ -1,0 +1,17 @@
+[package]
+authors = ["Wei Shen <shenwei356@gmail.com>"]
+name = "fastx"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+description = "fastx is a tool for FASTA/Q file manipulation, for learning purposes"
+keywords = ["bioinformatics", "fasta", "fastq"]
+categories = ["command-line-utilities", "science"]
+homepage = "https://github.com/shenwei356/fastx"
+documentation = "https://github.com/shenwei356/fastx"
+repository = "https://github.com/shenwei356/fastx"
+readme = "README.md"
+
+
+[dependencies]
+clap = { version = "4.5.53", features = ["derive"] }
