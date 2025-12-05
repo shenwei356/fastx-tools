@@ -1,6 +1,6 @@
-use fastx::cli::*;
-use fastx::grep::*;
-use fastx::stats::*;
+use fastx_tools::cli::*;
+use fastx_tools::grep::*;
+use fastx_tools::stats::*;
 
 fn main() {
     let cli = parse_args();

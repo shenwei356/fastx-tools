@@ -1,3 +1,3 @@
-# fastx
+# fastx-tools
 
-fastx is a tool for FASTA/Q file manipulation, for learning purposes.
+fastx-tools is a toolkit for FASTA/Q file manipulation, for learning purposes.
