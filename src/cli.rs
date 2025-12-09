@@ -40,6 +40,9 @@ pub struct StatsArgs {
     #[arg(num_args = 1.., default_value = "-", help = "FASTA/Q file(s)")]
     pub files: Vec<String>,
 
+    #[arg(short = 'o', long = "out-file" , default_value = "-", help = "output file")]
+    pub out_file: String,
+
     #[arg(short = 'a', long = "all", help = "Show all information")]
     pub all: bool,
 }

@@ -7,11 +7,13 @@ license = "MIT"
 description = "fastx-tools is a toolkit for FASTA/Q file manipulation, for learning purposes"
 keywords = ["bioinformatics", "fasta", "fastq"]
 categories = ["command-line-utilities", "science"]
-homepage = "https://github.com/shenwei356/fastx"
-documentation = "https://github.com/shenwei356/fastx"
-repository = "https://github.com/shenwei356/fastx"
+homepage = "https://github.com/shenwei356/fastx-tools"
+documentation = "https://github.com/shenwei356/fastx-tools"
+repository = "https://github.com/shenwei356/fastx-tools"
 readme = "README.md"
 
 
 [dependencies]
 clap = { version = "4.5.53", features = ["derive"] }
+
+fastx = { path = "../fastx" }
