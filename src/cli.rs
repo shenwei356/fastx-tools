@@ -29,10 +29,35 @@ pub struct Cli {
 #[derive(Subcommand)]
 pub enum Commands {
     /// Simple statistics of FASTA/Q files
+    Seq(SeqArgs),
+
+    /// Simple statistics of FASTA/Q files
+    SeqNeedletail(SeqNeedletailArgs),
+
+    /// Simple statistics of FASTA/Q files
     Stats(StatsArgs),
 
     /// Search FASTA/Q records
     Grep(GrepArgs),
+}
+
+#[derive(Args, Debug)]
+pub struct SeqArgs {
+    #[arg(num_args = 1.., default_value = "-", help = "FASTA/Q file(s)")]
+    pub files: Vec<String>,
+
+    #[arg(short = 'o', long = "out-file" , default_value = "-", help = "output file")]
+    pub out_file: String,
+}
+
+
+#[derive(Args, Debug)]
+pub struct SeqNeedletailArgs {
+    #[arg(num_args = 1.., default_value = "-", help = "FASTA/Q file(s)")]
+    pub files: Vec<String>,
+
+    #[arg(short = 'o', long = "out-file" , default_value = "-", help = "output file")]
+    pub out_file: String,
 }
 
 #[derive(Args, Debug)]
@@ -51,6 +76,9 @@ pub struct StatsArgs {
 pub struct GrepArgs {
     #[arg(num_args = 1.., default_value = "-", help = "FASTA/Q file(s)")]
     pub files: Vec<String>,
+
+    #[arg(short = 'o', long = "out-file" , default_value = "-", help = "output file")]
+    pub out_file: String,
 
     #[arg(
         short = 'p',
