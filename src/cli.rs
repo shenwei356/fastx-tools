@@ -22,22 +22,28 @@ Version: {name} v{version}
 {all-args}{after-help}",
 )]
 pub struct Cli {
+    #[arg(global = true, long,  help = "CPU profiling, run 'go tool pprof -http=:8080 profile.pb' later")]
+    pub pprof:bool,
+
+    #[arg(global = true, short = 'o', long = "out-file" , default_value = "-", help = "Output file")]
+    pub out_file: String,
+
     #[command(subcommand)]
     pub command: Commands,
 }
 
 #[derive(Subcommand)]
 pub enum Commands {
-    /// Simple statistics of FASTA/Q files
+    /// Read and write FASTA/Q files
     Seq(SeqArgs),
 
-    /// Simple statistics of FASTA/Q files
+    /// Read and write FASTA/Q files with Needletail
     SeqNeedletail(SeqNeedletailArgs),
 
-    /// Simple statistics of FASTA/Q files
+    /// Simple statistics of FASTA/Q files (unimplemented)
     Stats(StatsArgs),
 
-    /// Search FASTA/Q records
+    /// Search FASTA/Q records (unimplemented)
     Grep(GrepArgs),
 }
 
@@ -45,9 +51,6 @@ pub enum Commands {
 pub struct SeqArgs {
     #[arg(num_args = 1.., default_value = "-", help = "FASTA/Q file(s)")]
     pub files: Vec<String>,
-
-    #[arg(short = 'o', long = "out-file" , default_value = "-", help = "output file")]
-    pub out_file: String,
 }
 
 
