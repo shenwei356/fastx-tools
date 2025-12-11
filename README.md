@@ -7,15 +7,16 @@ fastx-tools is a toolkit for FASTA/Q file manipulation, for learning purposes.
 
 ### Reading and writing plain FASTA/Q files
 
-A human T2T genome
-
     in=t.human.fa
+    # in=t.fq.gz
 
     hyperfine --warmup 3 --export-markdown - \
         "seqtk seq $in > /dev/null" \
         "seqkit seq -w 0 $in > /dev/null" \
         "fastx-tools seq $in > /dev/null" \
         "fastx-tools seq-needletail $in > /dev/null" 
+
+A human T2T genome
 
 | Command | Mean [s] | Min [s] | Max [s] | Relative |
 |:---|---:|---:|---:|---:|

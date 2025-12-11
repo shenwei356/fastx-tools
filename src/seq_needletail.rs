@@ -8,10 +8,10 @@ pub fn run_seq_needletail(args: &SeqNeedletailArgs, global: &Cli) -> anyhow::Res
     let mut writer = xwrite(&global.out_file, 65536)
         .with_context(|| format!("failed to write to file: {}", &args.out_file))?;
 
-    let fa_mark: &[u8] = b">";
-    let fq_mark: &[u8] = b"@";
-    let fq_sep: &[u8] = b"\n+\n";
-    let lf: &[u8] = b"\n";
+    const FA_MARK: &[u8] = b">";
+    const FQ_MARK: &[u8] = b"@";
+    const FQ_SEP: &[u8] = b"\n+\n";
+    const LF: &[u8] = b"\n";
 
     for file in &args.files {
         let mut reader = parse_fastx_file(&file)
@@ -22,20 +22,20 @@ pub fn run_seq_needletail(args: &SeqNeedletailArgs, global: &Cli) -> anyhow::Res
 
             match seq.qual() {
                 Some(qual) => {
-                    writer.write_all(fq_mark)?;
+                    writer.write_all(FQ_MARK)?;
                     writer.write_all(seq.id())?;
-                    writer.write_all(lf)?;
+                    writer.write_all(LF)?;
                     writer.write_all(&seq.seq())?;
-                    writer.write_all(fq_sep)?;
+                    writer.write_all(FQ_SEP)?;
                     writer.write_all(qual)?;
-                    writer.write_all(lf)?;
+                    writer.write_all(LF)?;
                 }
                 _ => {
-                    writer.write_all(fa_mark)?;
+                    writer.write_all(FA_MARK)?;
                     writer.write_all(seq.id())?;
-                    writer.write_all(lf)?;
+                    writer.write_all(LF)?;
                     writer.write_all(&seq.seq())?;
-                    writer.write_all(lf)?;
+                    writer.write_all(LF)?;
                 }
             }
         }

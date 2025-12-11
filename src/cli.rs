@@ -15,7 +15,7 @@ use clap::{Args, Parser, Subcommand};
 
 Version: {name} v{version}
  Author: {author}
-   Home: https://github.com/shenwei356/fastx
+   Home: https://github.com/shenwei356/fastx-tools
 
 {usage-heading} {usage}
 
