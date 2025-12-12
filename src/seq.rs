@@ -15,6 +15,7 @@ pub fn run_seq(args: &SeqArgs, global: &Cli) -> anyhow::Result<()> {
     for file in &args.files {
         let mut reader = fastx::Reader::new(&file)
             .with_context(|| format!("failed to parse input file: {}", file))?;
+        reader.skip_id_parsing();
 
         while let Some(res) = reader.next() {
             let seq = res?;
