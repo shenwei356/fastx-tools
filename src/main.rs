@@ -4,9 +4,11 @@ use fastx_tools::seq::*;
 use fastx_tools::seq_needletail::*;
 use fastx_tools::stats::*;
 
-// for pprof
+#[cfg(feature = "pprof")]
 use pprof::protos::Message;
+#[cfg(feature = "pprof")]
 use scopeguard::defer;
+#[cfg(feature = "pprof")]
 use std::io::Write;
 
 fn main() -> anyhow::Result<()> {
@@ -21,29 +23,37 @@ fn main() -> anyhow::Result<()> {
         }
     }
 
-    if cli.pprof {
-        let guard = pprof::ProfilerGuardBuilder::default()
-            .frequency(1000)
-            .blocklist(&["libc", "libgcc", "pthread", "vdso"])
-            .build()
-            .unwrap();
+    #[cfg(feature = "pprof")]
+    {
+        if cli.pprof {
+            let guard = pprof::ProfilerGuardBuilder::default()
+                .frequency(1000)
+                .blocklist(&["libc", "libgcc", "pthread", "vdso"])
+                .build()
+                .unwrap();
 
-        defer! {
-            match guard.report().build() {
-                Ok(report) => {
-                    let mut file = std::fs::File::create("profile.pb").unwrap();
-                    let profile = report.pprof().unwrap();
+            defer! {
+                match guard.report().build() {
+                    Ok(report) => {
+                        let mut file = std::fs::File::create("profile.pb").unwrap();
+                        let profile = report.pprof().unwrap();
 
-                    let mut content = Vec::new();
-                    profile.encode(&mut content).unwrap();
-                    file.write_all(&content).unwrap();
-                }
-                Err(_) => {},
-            };
+                        let mut content = Vec::new();
+                        profile.encode(&mut content).unwrap();
+                        file.write_all(&content).unwrap();
+                    }
+                    Err(_) => {},
+                };
+            }
+
+            run_command(&cli)
+        } else {
+            run_command(&cli)
         }
+    }
 
-        run_command(&cli)
-    } else {
+    #[cfg(not(feature = "pprof"))]
+    {
         run_command(&cli)
     }
 }

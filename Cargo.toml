@@ -21,8 +21,18 @@ clap = { version = "4.5.53", features = ["derive"] }
 fastx = { git = "https://github.com/shenwei356/fastx", tag = "v0.1.1" }
 needletail = "0.6.3"
 
-pprof = { version = "0.15.0", features = ["prost-codec"] }
-scopeguard = "1.2.0"
+[dependencies.pprof]
+version = "0.15.0"
+features = ["prost-codec"]
+optional = true
+
+[dependencies.scopeguard]
+version = "1.2.0"
+optional = true
+
+[features]
+default = []
+pprof = ["dep:pprof", "scopeguard"]
 
 # The profile that 'dist' will build with
 [profile.dist]

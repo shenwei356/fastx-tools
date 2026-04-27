@@ -22,8 +22,9 @@ Version: {name} v{version}
 {all-args}{after-help}",
 )]
 pub struct Cli {
+    #[cfg(feature = "pprof")]
     #[arg(global = true, long,  help = "CPU profiling, run 'go tool pprof -http=:8080 profile.pb' later")]
-    pub pprof:bool,
+    pub pprof: bool,
 
     #[arg(global = true, short = 'o', long = "out-file" , default_value = "-", help = "Output file")]
     pub out_file: String,
