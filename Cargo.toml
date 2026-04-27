@@ -23,3 +23,8 @@ needletail = "0.6.3"
 
 pprof = { version = "0.15.0", features = ["prost-codec"] }
 scopeguard = "1.2.0"
+
+# The profile that 'dist' will build with
+[profile.dist]
+inherits = "release"
+lto = "thin"
