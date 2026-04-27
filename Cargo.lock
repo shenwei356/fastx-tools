@@ -354,8 +354,8 @@ checksum = "9f1f227452a390804cdb637b74a86990f2a7d7ba4b7d5693aac9b4dd6defd8d6"
 
 [[package]]
 name = "fastx"
-version = "0.1.1"
-source = "git+https://github.com/shenwei356/fastx?tag=v0.1.1#a5a4d44907f248e6ebd29bbc63c3b89f14bc5199"
+version = "0.1.2"
+source = "git+https://github.com/shenwei356/fastx?tag=v0.1.2#1fe1be483b865bda35b9a2c41ffe2cb5f05d9ca2"
 dependencies = [
  "buffer-redux",
  "bzip2 0.6.1",
