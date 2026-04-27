@@ -1,6 +1,6 @@
 use crate::cli::*;
 use anyhow::Context;
-use fastx::util::xwrite;
+use fastx::xopen::xwrite;
 
 pub fn run_seq(args: &SeqArgs, global: &Cli) -> anyhow::Result<()> {
     let mut writer = xwrite(&global.out_file, 65536)
