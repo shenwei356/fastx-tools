@@ -7,7 +7,14 @@ fastx-tools is a toolkit for FASTA/Q file manipulation, for learning purposes.
 
 ### Reading and writing plain FASTA/Q files
 
-Note that, `seqkit` and `fastx-tools seq`parses sequence ID from the header line, while other tools do not.
+Versions
+    
+    seqtk      1.5-r133
+    seqkit     2.14.0
+    fastx      0.1.3  (used by this tool)
+    needletail 0.7.3
+
+Note that, `seqkit` parses sequence ID from the header line, while other tools do not.
 
     in=t.human.fna
     # in=t.human.single-line.fna
@@ -24,10 +31,10 @@ A human T2T genome
 
 | Command | Mean [s] | Min [s] | Max [s] | Relative |
 |:---|---:|---:|---:|---:|
-| `seqtk seq t.human.fna > /dev/null` | 1.196 ± 0.024 | 1.161 | 1.230 | 1.00 |
-| `seqkit seq -w 0 t.human.fna > /dev/null` | 1.353 ± 0.024 | 1.324 | 1.402 | 1.13 ± 0.03 |
-| `fastx-tools seq t.human.fna > /dev/null` | 1.243 ± 0.013 | 1.234 | 1.280 | 1.04 ± 0.02 |
-| `fastx-tools seq-needletail t.human.fna > /dev/null` | 2.036 ± 0.033 | 1.977 | 2.096 | 1.70 ± 0.04 |
+| `seqtk seq t.human.fna > /dev/null` | 1.063 ± 0.028 | 1.035 | 1.130 | 1.02 ± 0.03 |
+| `seqkit seq -w 0 t.human.fna > /dev/null` | 1.637 ± 0.014 | 1.620 | 1.664 | 1.58 ± 0.02 |
+| `fastx-tools seq t.human.fna > /dev/null` | 1.039 ± 0.012 | 1.023 | 1.059 | 1.00 |
+| `fastx-tools seq-needletail t.human.fna > /dev/null` | 2.193 ± 0.315 | 1.842 | 2.724 | 2.11 ± 0.30 |
 
 Peak memory
 
@@ -40,10 +47,10 @@ A human T2T genome (single-line FASTA)
 
 | Command | Mean [ms] | Min [ms] | Max [ms] | Relative |
 |:---|---:|---:|---:|---:|
-| `seqtk seq t.human.single-line.fna > /dev/null` | 819.6 ± 10.5 | 805.8 | 840.3 | 1.00 |
-| `seqkit seq -w 0 t.human.single-line.fna > /dev/null` | 1073.3 ± 23.8 | 1050.1 | 1104.1 | 1.31 ± 0.03 |
-| `fastx-tools seq t.human.single-line.fna > /dev/null` | 835.5 ± 24.7 | 809.3 | 877.3 | 1.02 ± 0.03 |
-| `fastx-tools seq-needletail t.human.single-line.fna > /dev/null` | 1078.7 ± 17.6 | 1062.8 | 1116.9 | 1.32 ± 0.03 |
+| `seqtk seq t.human.single-line.fna > /dev/null` | 932.5 ± 14.7 | 917.3 | 965.2 | 1.02 ± 0.03 |
+| `seqkit seq -w 0 t.human.single-line.fna > /dev/null` | 1405.3 ± 35.6 | 1354.2 | 1452.6 | 1.54 ± 0.05 |
+| `fastx-tools seq t.human.single-line.fna > /dev/null` | 910.1 ± 17.9 | 884.5 | 929.0 | 1.00 |
+| `fastx-tools seq-needletail t.human.single-line.fna > /dev/null` | 1170.1 ± 13.9 | 1144.1 | 1193.2 | 1.29 ± 0.03 |
 
 Peak memory
 
@@ -56,16 +63,16 @@ Peak memory
 
 | Command | Mean [s] | Min [s] | Max [s] | Relative |
 |:---|---:|---:|---:|---:|
-| `seqtk seq t.fq > /dev/null` | 1.105 ± 0.011 | 1.093 | 1.125 | 1.80 ± 0.04 |
-| `seqkit seq -w 0 t.fq > /dev/null` | 0.842 ± 0.009 | 0.832 | 0.861 | 1.37 ± 0.03 |
-| `fastx-tools seq t.fq > /dev/null` | 0.760 ± 0.013 | 0.747 | 0.789 | 1.23 ± 0.03 |
-| `fastx-tools seq-needletail t.fq > /dev/null` | 0.615 ± 0.013 | 0.604 | 0.645 | 1.00 |
+| `seqtk seq t.fq > /dev/null` | 1.118 ± 0.013 | 1.102 | 1.140 | 1.85 ± 0.04 |
+| `seqkit seq -w 0 t.fq > /dev/null` | 0.846 ± 0.010 | 0.832 | 0.860 | 1.40 ± 0.03 |
+| `fastx-tools seq t.fq > /dev/null` | 0.704 ± 0.014 | 0.690 | 0.727 | 1.17 ± 0.03 |
+| `fastx-tools seq-needletail t.fq > /dev/null` | 0.603 ± 0.009 | 0.589 | 0.618 | 1.00 |
 
 Gzip-compressed 5M SE-150bp reads.
 
 | Command | Mean [s] | Min [s] | Max [s] | Relative |
 |:---|---:|---:|---:|---:|
-| `seqtk seq t.fq.gz > /dev/null` | 4.371 ± 0.019 | 4.346 | 4.402 | 1.45 ± 0.01 |
-| `seqkit seq -w 0 t.fq.gz > /dev/null` | 4.238 ± 0.024 | 4.220 | 4.290 | 1.40 ± 0.01 |
-| `fastx-tools seq t.fq.gz > /dev/null` | 3.076 ± 0.029 | 3.046 | 3.145 | 1.02 ± 0.01 |
-| `fastx-tools seq-needletail t.fq.gz > /dev/null` | 3.018 ± 0.014 | 2.997 | 3.035 | 1.00 |
+| `seqtk seq t.fq.gz > /dev/null` | 4.355 ± 0.025 | 4.317 | 4.394 | 1.47 ± 0.02 |
+| `seqkit seq -w 0 t.fq.gz > /dev/null` | 4.267 ± 0.031 | 4.228 | 4.316 | 1.44 ± 0.02 |
+| `fastx-tools seq t.fq.gz > /dev/null` | 2.990 ± 0.033 | 2.960 | 3.069 | 1.01 ± 0.02 |
+| `fastx-tools seq-needletail t.fq.gz > /dev/null` | 2.959 ± 0.039 | 2.926 | 3.054 | 1.00 |
