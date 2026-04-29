@@ -1,6 +1,6 @@
 use crate::cli::*;
 use anyhow::Context;
-use fastx::xopen::xwrite;
+use fastseq::xopen::xwrite;
 
 use needletail::parse_fastx_file;
 

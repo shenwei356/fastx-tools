@@ -1,6 +1,7 @@
 use crate::cli::*;
 use anyhow::Context;
-use fastx::xopen::xwrite;
+use fastseq::Reader;
+use fastseq::xopen::xwrite;
 
 pub fn run_seq(args: &SeqArgs, global: &Cli) -> anyhow::Result<()> {
     let mut writer = xwrite(&global.out_file, 65536)
@@ -13,8 +14,8 @@ pub fn run_seq(args: &SeqArgs, global: &Cli) -> anyhow::Result<()> {
     const LF: &[u8] = b"\n";
 
     for file in &args.files {
-        let mut reader = fastx::Reader::new(&file)
-            .with_context(|| format!("failed to parse input file: {}", file))?;
+        let mut reader =
+            Reader::new(&file).with_context(|| format!("failed to parse input file: {}", file))?;
         reader.skip_id_parsing();
 
         while let Some(res) = reader.next() {

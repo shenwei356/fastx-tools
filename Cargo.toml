@@ -1,7 +1,7 @@
 [package]
 authors = ["Wei Shen <shenwei356@gmail.com>"]
 name = "fastx-tools"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2024"
 license = "MIT"
 description = "fastx-tools is a toolkit for FASTA/Q file manipulation, for learning purposes"
@@ -17,8 +17,8 @@ readme = "README.md"
 anyhow = "1.0.100"
 clap = { version = "4.5.53", features = ["derive"] }
 
-# fastx = { path = "../fastx" }
-fastx = { git = "https://github.com/shenwei356/fastx", tag = "v0.1.3" }
+# fastseq = { path = "../fastseq" }
+fastseq = "0.1.4"
 needletail = "0.7.3"
 
 [dependencies.pprof]
